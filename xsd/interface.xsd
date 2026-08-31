@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:ord="https://lslabsessions.com/xml/order/v1"
+    targetNamespace="https://lslabsessions.com/xml/order/v1"
+    elementFormDefault="qualified"
+    attributeFormDefault="unqualified">
+
+    <xs:simpleType name="OrderIdType">
+        <xs:restriction base="xs:positiveInteger"/>
+    </xs:simpleType>
+
+    <xs:simpleType name="CustomerType">
+        <xs:restriction base="xs:string">
+            <xs:minLength value="1"/>
+            <xs:maxLength value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="PositiveAmountType">
+        <xs:restriction base="xs:decimal">
+            <xs:minExclusive value="0"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="CurrencyType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="EUR"/>
+            <xs:enumeration value="USD"/>
+            <xs:enumeration value="GBP"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="AmountType">
+        <xs:simpleContent>
+            <xs:extension base="ord:PositiveAmountType">
+                <xs:attribute
+                    name="currency"
+                    type="ord:CurrencyType"
+                    use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+    <xs:complexType name="OrderType">
+        <xs:sequence>
+            <xs:element
+                name="orderId"
+                type="ord:OrderIdType"/>
+
+            <xs:element
+                name="customer"
+                type="ord:CustomerType"/>
+
+            <xs:element
+                name="amount"
+                type="ord:AmountType"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element
+        name="order"
+        type="ord:OrderType"/>
+
+</xs:schema>
