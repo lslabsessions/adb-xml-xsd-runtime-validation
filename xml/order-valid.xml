@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ord:order
+    xmlns:ord="https://lslabsessions.com/xml/order/v1">
+
+    <ord:orderId>1001</ord:orderId>
+    <ord:customer>LS Lab Sessions</ord:customer>
+    <ord:amount currency="EUR">125.50</ord:amount>
+
+</ord:order>
